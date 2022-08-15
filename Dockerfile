@@ -1,6 +1,8 @@
 FROM ubuntu:20.04 
 #pkg-config-aarch64-linux-gnu is not available on 22.04
 
+USER root
+
 ARG ARM="arm64"
 ARG GCC_VER="10.3.0"
 ARG OS_TYPE="bullseye"
@@ -14,6 +16,7 @@ ENV FLUTTER_ENGINE_SHA="37f9852034729e0ab0f52bf913294e833ff1ec55" \
 
 COPY arm64.toolchain /opt/arm64.toolchain
 
+
 RUN set -eux; \
     echo ">>>Prepare time zone settings" ;\
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone ;\
@@ -24,7 +27,7 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y apt-utils ;\
     apt-get install -y ca-certificates gcc make pkg-config-aarch64-linux-gnu gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu cmake wget xz-utils git clang ;\
-    apt-get install -y ttf-mscorefonts-installer libc6:arm64 libgl1-mesa-dev:arm64 libgles2-mesa-dev:arm64 libegl1-mesa-dev:arm64 libdrm-dev:arm64 libgbm-dev:arm64 fontconfig:arm64 libsystemd-dev:arm64 libinput-dev:arm64 libudev-dev:arm64 libxkbcommon-dev:arm64; \
+    apt-get install -y ttf-mscorefonts-installer libc6:arm64 libgl1-mesa-dev:arm64 libgles2-mesa-dev:arm64 libegl1-mesa-dev:arm64 libdrm-dev:arm64 libgbm-dev:arm64 fontconfig libsystemd-dev:arm64 libinput-dev:arm64 libudev-dev:arm64 libxkbcommon-dev:arm64; \
     apt-get install -y --fix-missing libgstreamer1.0-dev:arm64 libgstreamer-plugins-base1.0-dev:arm64 gstreamer1.0-plugins-base:arm64 gstreamer1.0-plugins-good:arm64 gstreamer1.0-plugins-ugly:arm64 gstreamer1.0-libav:arm64 ;\
     apt-get clean; \
     rm -rf /var/lib/apt/lists/* ;\

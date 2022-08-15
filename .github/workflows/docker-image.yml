@@ -11,6 +11,14 @@ on:
       - '.github/workflows/docker-image.yml'
     branches:
       - master
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'Dockerfile'
+      - 'arm64.toolchain'
+      - '.github/workflows/docker-image.yml'
+    branches:
+      - '**'
 
 env:
   REGISTRY: docker.io
@@ -19,6 +27,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
 
     steps:
       - name: Checkout repository
