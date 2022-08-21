@@ -8,4 +8,4 @@ Cross compilation image to build [flutter-pi](https://github.com/ardera/flutter-
 
 - Pull [cross-flutter-pi4](https://hub.docker.com/repository/docker/douman/cross-flutter-pi4)
 - Configure cmake using `cmake <cmake file folder> -DCMAKE_TOOLCHAIN_FILE=/opt/arm64.toolchain`
-- Build `cmake <cmake build folder> --build`
+- Build `cmake --build <cmake build folder>`
